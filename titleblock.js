@@ -35,6 +35,10 @@ const titleblcok = async (files, callback) => {
 		}
 		while (list.length) {
 			switch (list.shift()) {
+				case 'X': { // ['X',dummy_field]
+					const dummy = list.shift();
+					//console.log(dummy);
+				} break;
 				case 'T': { // ['T', x, y, size, height, r, g, b, a, rotate, 'text to write']
 					const textOption = {
 						x: list.shift() * 72, y: list.shift() * 72,
@@ -42,16 +46,18 @@ const titleblcok = async (files, callback) => {
 						color: PDFLib.rgb(Number(list.shift()), Number(list.shift()), Number(list.shift())), opacity: Number(list.shift()),
 						rotate: PDFLib.degrees(Number(list.shift())),
 					font: font};
+					//console.log(textOption);
 					page.drawText(list.shift(), textOption);
-					} break;
-				case 'P': { // ['P', x, y, w, h, rotate, 'picture filename']
+				} break;
+				case 'P': { // ['P', x, y, w, h, rotate, picture_filename]
 					const imageOption = {
 						x: list.shift() * 72, y: list.shift() * 72,
 						width: list.shift() * 72, height: list.shift() * 72,
 						rotate: PDFLib.degrees(Number(list.shift())),
 					};
+					//console.log(imageOption);
 					page.drawImage(src.pictures[list.shift()], imageOption);
-					} break;
+				} break;
 				case 'I': { // ['I', x, y, size, height, r, g, b, a, rotate, ref_col, ref_rowStart, ref_rowLen]
 					const textOption = {
 						x: list.shift() * 72, y: list.shift() * 72,
@@ -59,6 +65,7 @@ const titleblcok = async (files, callback) => {
 						color: PDFLib.rgb(Number(list.shift()), Number(list.shift()), Number(list.shift())), opacity: Number(list.shift()),
 						rotate: PDFLib.degrees(Number(list.shift())),
 					font: font};
+					//console.log(textOption);
 					const ref_col = list.shift() - 1, ref_rowStart = list.shift() - 1, ref_rowEnd = ref_rowStart +  Number(list.shift());
 					let text = '';
 					for (let i = ref_rowStart; i < ref_rowEnd; i++) {
@@ -66,7 +73,7 @@ const titleblcok = async (files, callback) => {
 						text += index[i][ref_col] + "\n";
 					}
 					page.drawText(text, textOption);
-					} break;
+				} break;
 				default:
 					console.error('Unknown command');
 			}
