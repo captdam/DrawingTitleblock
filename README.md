@@ -5,7 +5,7 @@ Add custom titleblock to engineering drawing
 Select or drop index file (CSV), drawings (PDF) and pictures (JPEG and PNG) in the bottom-left input area.
 
 ## Index file syntax
-Each row of the index file represent a page.
+Each row of the index file represents a page.
 
 ### Type
 The first element of each row is the page type. It can be a specific page from a drawing file, or a blank page with specific size.
@@ -24,7 +24,7 @@ Note: The rotate only sets the view orientation of that page, it doesn’t modif
 
 Following can be one or more elements. Elements can be:
 
-Note: origin is at lower-left corner (before rotation).
+Note: Origin is at lower-left corner (before rotation).
 
 ### Text
 Starting with the text symbol ‘T’ means Text. Following are parameters for x-y position, text height, line height (all in inches), RGBA color (0.0 to 1.0), rotation (in degrees) and the text to write. “\n” in text will make a new line.
@@ -43,9 +43,9 @@ P,9,5,4,2,45,icon.png
 The above example will insert the picture “icon.png” at (x = 9, y = 5). The size of this picture will be 4 inches wide and 2 inches high, rotated by 45 degrees.
 
 ### Index
-Starting with the text symbol ‘I’ means Index, Following parameters follow the same syntax as the Text except the tailing few are used to reference to fields to be indexed. ref_col indicates which column (left-most column is 1, empty columns are counted) of the index file to be copied into the index. ref_rowStart indicates the first row to be included into the index and ref_rowLen indicates how many rows to be indexed.
+Starting with the text symbol ‘I’ means Index. Following parameters follow the same syntax as the Text except the tailing few are used to reference to fields to be indexed. ```ref_col``` indicates which column (left-most column is 1, empty columns are counted) of the index file to be copied into the index. ```ref_rowStart``` indicates the first row (first row in index file is 1) to be included into the index and ```ref_rowLen``` indicates how many rows to be indexed.
 ```
-I,x,y,size,height,r,g,b,a,rotate,ref_col,ref_rowStart,ref_rowLen
+I,x,y,h,lh,r,g,b,a,rotate,ref_col,ref_rowStart,ref_rowLen
 I,1,10,0.1,0.15,0,0,0,1,0,5,2,20
 ```
 The above example will place the index at (x = 1, y = 10) using 0.1-in high text and 0.15-in line height in solid black. The index will use the 5th column of the index file, starts from 2nd row and for 20 rows.
